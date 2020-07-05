@@ -1,0 +1,189 @@
+package pk1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class facultysignintest {
+	
+WebDriver driver;
+
+	public boolean isAlertPresent() 
+		{ 
+			try 
+			{ 
+				driver.switchTo().alert(); 
+				return true; 
+			}   // try 
+			catch (NoAlertPresentException Ex) 
+			{ 
+				return false; 
+			}   // catch 
+		} 
+	
+	public void posinvoke(){
+		
+		try {
+			System.setProperty("webdriver.chrome.driver","D:\\Selenium\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			
+			driver.get("http://facultyportal-quizapp.herokuapp.com/");
+			
+			
+			driver.findElement(By.id("username")).sendKeys("priyanka_kumar");
+			driver.findElement(By.id("password")).sendKeys("12345");
+			driver.findElement(By.className("submission")).click();
+			
+			Thread.sleep(2000);
+			
+			try 
+			{ 
+				driver.switchTo().alert(); 
+				driver.switchTo().alert().accept();
+				System.out.println("Positive Test case failed since it has given alerts regarding invalid credentials");
+			}   // try 
+			catch (NoAlertPresentException Ex) 
+			{ 
+				System.out.println("Positive Test case passed since it has no alerts regarding invalid credentials");
+			} 
+			
+			
+//			if(isAlertPresent()){
+//				System.out.println("Positive Test case failed since it has given alerts regarding invalid credentials");
+//			}
+//			else{
+//				System.out.println("Positive Test case passed since it has no alerts regarding invalid credentials");
+//			}
+			driver.close();
+			
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void negunameinvoke(){
+		
+		try {
+			System.setProperty("webdriver.chrome.driver","D:\\Selenium\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			
+			driver.get("http://facultyportal-quizapp.herokuapp.com/");
+			
+			driver.findElement(By.id("username")).sendKeys("ganeshiyer");
+			driver.findElement(By.id("password")).sendKeys("software");
+			driver.findElement(By.className("submission")).click();
+			
+			
+            Thread.sleep(6000);
+			
+			try 
+			{ 
+				driver.switchTo().alert(); 
+				driver.switchTo().alert().accept();
+				System.out.println("Negative Test case passed since it has given alerts regarding invalid credentials");
+			}   // try 
+			catch (NoAlertPresentException Ex) 
+			{ 
+				System.out.println("Negative Test case failed since it has no alerts regarding invalid credentials");
+			} 
+			
+			
+//			if(isAlertPresent()){
+//				System.out.println("Positive Test case failed since it has given alerts regarding invalid credentials");
+//			}
+//			else{
+//				System.out.println("Positive Test case passed since it has no alerts regarding invalid credentials");
+//			}
+			driver.close();
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void negpswdinvoke(){
+		
+		try {
+			System.setProperty("webdriver.chrome.driver","D:\\Selenium\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			
+			driver.get("http://facultyportal-quizapp.herokuapp.com/");
+			
+			driver.findElement(By.id("username")).sendKeys("priyanka_kumar");
+			driver.findElement(By.id("password")).sendKeys("tej");
+			driver.findElement(By.className("submission")).click();
+			
+			Thread.sleep(7000);
+			
+			try 
+			{ 
+				driver.switchTo().alert(); 
+				driver.switchTo().alert().accept();
+				System.out.println("Negative Test case passed since it has given alerts regarding invalid credentials");
+			}   // try 
+			catch (NoAlertPresentException Ex) 
+			{ 
+				System.out.println("Negative Test case failed since it has no alerts regarding invalid credentials");
+			} 
+			
+			
+//			if(isAlertPresent()){
+//				System.out.println("Positive Test case failed since it has given alerts regarding invalid credentials");
+//			}
+//			else{
+//				System.out.println("Positive Test case passed since it has no alerts regarding invalid credentials");
+//			}
+			driver.close();
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		facultysignintest obj = new facultysignintest();
+//		obj.posinvoke();
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		obj.negunameinvoke();
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		obj.negpswdinvoke();
+		
+	}
+
+}

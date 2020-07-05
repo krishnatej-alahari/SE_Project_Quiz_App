@@ -1,0 +1,190 @@
+package pk1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class facultyeditquiz {
+
+
+	WebDriver driver;
+	
+	public void posinvoke(){
+		
+		try {
+			System.setProperty("webdriver.chrome.driver","F:\\6th SEM\\SE\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			
+			driver.get("http://facultyportal-quizapp.herokuapp.com/");
+			
+			driver.findElement(By.id("username")).sendKeys("priyanka_kumar");
+			driver.findElement(By.id("password")).sendKeys("ganeshsir");
+			driver.findElement(By.className("submission")).click();
+			Thread.sleep(2000);
+			
+			driver.findElement(By.xpath("(//*[@href='/editQuiz'])[2]")).click();
+			
+			Thread.sleep(2000);
+			Select class1 = new Select(driver.findElement(By.name("class")));
+			class1.selectByVisibleText("4E 15CSE402");
+			Thread.sleep(2000);
+			driver.findElement(By.name("quiz_name")).clear();
+			driver.findElement(By.name("quiz_name")).sendKeys("Quiz-1");
+			Thread.sleep(2000);
+			WebElement dateBox = driver.findElement(By.xpath("//*[@name='date']"));
+			dateBox.sendKeys("15032020");
+			Thread.sleep(2000);
+			driver.findElement(By.name("score")).clear();
+			driver.findElement(By.name("score")).sendKeys("5");
+			Thread.sleep(2000);
+		
+			WebElement timeBox1 = driver.findElement(By.xpath("//*[@name='start_time']"));
+			timeBox1.sendKeys("1203");
+			Thread.sleep(2000);
+			WebElement timeBox2 = driver.findElement(By.xpath("//*[@name='end_time']"));
+			timeBox2.sendKeys("1600");
+			Thread.sleep(2000);
+			driver.findElement(By.name("time_limit")).clear();
+			driver.findElement(By.name("time_limit")).sendKeys("70");
+			Thread.sleep(2000);
+			driver.findElement(By.name("negative_marking")).clear();
+			driver.findElement(By.name("negative_marking")).sendKeys("2");
+			Thread.sleep(2000);
+			driver.findElement(By.className("submission")).click();
+			Thread.sleep(2000);
+			
+			try 
+			{ 
+				driver.switchTo().alert(); 
+				String s=driver.switchTo().alert().getText();
+				if(s.equals("Quiz Edited")){
+					System.out.println("Positive Test case passed since it has given alerts regarding quiz has created");
+				}
+				else{
+					System.out.println("Positive Test case failed since it has no alerts regarding quiz has created");
+				}
+				driver.switchTo().alert().accept();
+				
+			}   // try 
+			catch (NoAlertPresentException Ex) 
+			{ 
+				
+			} 
+			
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.close();
+	}
+	
+public void neginvoke(){
+		
+		try {
+			System.setProperty("webdriver.chrome.driver","F:\\6th SEM\\SE\\chromedriver.exe");
+			driver = new ChromeDriver();
+			driver.manage().deleteAllCookies();
+			driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			
+			driver.get("http://facultyportal-quizapp.herokuapp.com/");
+			
+			driver.findElement(By.id("username")).sendKeys("priyanka_kumar");
+			driver.findElement(By.id("password")).sendKeys("ganeshsir");
+			driver.findElement(By.className("submission")).click();
+			Thread.sleep(2000);
+			
+			driver.findElement(By.xpath("(//*[@href='/editQuiz'])[1]")).click();
+			
+			Thread.sleep(2000);
+			
+			Select class1 = new Select(driver.findElement(By.name("class")));
+			class1.selectByVisibleText("4E 15CSE402");
+			Thread.sleep(2000);
+			driver.findElement(By.name("quiz_name")).clear();
+			driver.findElement(By.name("quiz_name")).sendKeys("Quiz-1");
+			Thread.sleep(2000);
+			WebElement dateBox = driver.findElement(By.xpath("//*[@name='date']"));
+			dateBox.sendKeys("14032020");
+			Thread.sleep(2000);
+			driver.findElement(By.name("score")).clear();
+			driver.findElement(By.name("score")).sendKeys("4");
+			Thread.sleep(2000);
+			driver.findElement(By.name("no_of_questions")).sendKeys("20");
+			Thread.sleep(2000);
+			WebElement timeBox1 = driver.findElement(By.xpath("//*[@name='start_time']"));
+			timeBox1.sendKeys("2200");
+			Thread.sleep(2000);
+			WebElement timeBox2 = driver.findElement(By.xpath("//*[@name='end_time']"));
+			timeBox2.sendKeys("2300");
+			Thread.sleep(2000);
+			driver.findElement(By.name("access_code")).sendKeys("1999");
+			Thread.sleep(2000);
+			driver.findElement(By.name("time_limit")).clear();
+			driver.findElement(By.name("time_limit")).sendKeys("60");
+			Thread.sleep(2000);
+			driver.findElement(By.name("negative_marking")).clear();
+			driver.findElement(By.name("negative_marking")).sendKeys("155");
+			Thread.sleep(2000);
+			Select section = new Select(driver.findElement(By.name("topics")));
+			section.selectByVisibleText("Introduction");
+			driver.findElement(By.className("submission")).click();
+			Thread.sleep(2000);
+			
+			try 
+			{ 
+				driver.switchTo().alert(); 
+				String s=driver.switchTo().alert().getText();
+				if(s.equals("Please check the fields")){
+					System.out.println("Negative Test case passed since it has given alerts regarding checking fields");
+				}
+				else{
+					System.out.println("Negative Test case failed since it has no alerts regarding checking fields");
+				}
+				driver.switchTo().alert().accept();
+				
+			}   // try 
+			catch (NoAlertPresentException Ex) 
+			{ 
+				
+			} 
+			
+		} 
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		driver.close();
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		facultyeditquiz obj = new facultyeditquiz();
+		obj.posinvoke();
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		obj.neginvoke();
+		
+	}
+
+}
